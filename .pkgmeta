@@ -1,0 +1,13 @@
+package-as: AethysTool
+
+externals:
+ AethysCore:  
+  url: https://github.com/Aethys256/AethysCore
+
+enable-nolib-creation: no
+
+ignore:
+ - .github
+ - .gitattributes
+ - LICENSE
+ - README.md
