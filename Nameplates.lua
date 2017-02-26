@@ -1,25 +1,27 @@
---- Localize Vars
--- Addon
-local addonName, AT = ...;
--- AethysCore
-local AC = AethysCore;
-local Cache = AethysCore_Cache;
-local Unit = AC.Unit;
-local Player = Unit.Player;
-local Target = Unit.Target;
-local Spell = AC.Spell;
-local Item = AC.Item;
--- Lua
-local pairs = pairs;
-local tostring = tostring;
--- Nameplates Locals
-local FrameID, Nameplate, ThisUnit, Count
+--- ============================ HEADER ============================
+--- ======= LOCALIZE =======
+  -- Addon
+    local addonName, AT = ...;
+    -- AethysCore
+    local AC = AethysCore;
+    local Cache = AethysCore_Cache;
+    local Unit = AC.Unit;
+    local Player = Unit.Player;
+    local Target = Unit.Target;
+    local Spell = AC.Spell;
+    local Item = AC.Item;
+    -- Lua
+    local pairs = pairs;
+    local tostring = tostring;
+    -- File Locals
+    local FrameID, Nameplate, ThisUnit, Count
+    AT.Nameplate = {
+        TTD = {}
+    };
 
-AT.Nameplate = {
-    TTD = {}
-};
 
---- TTD Text
+--- ============================ CONTENT ============================
+--- ======= TTD TEXT =======
     -- Add TTD Infos to Nameplates
     function AT.Nameplate.AddTTD ()
         AT.Nameplate.HideTTD();
