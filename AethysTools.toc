@@ -1,14 +1,14 @@
 ## Interface: 70100
 
-## Title: |cFFFFF569Aethys|r Tool
+## Title: Aethys |cFFA330C9Tools|r
 ## Author: Aethys
-## Version: 7.1.5001
+## Version: 7.1.5002
 ## Notes: Quality of Life + Extra Features using AethysCore.
 
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## Dependencies: AethysCore
-## SavedVariables: AethysToolDB
+## SavedVariables: AethysToolsDB
 
 Settings.lua
 Nameplates.lua

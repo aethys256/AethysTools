@@ -14,10 +14,10 @@ local Item = AC.Item;
 
 --- Globalize Vars
 -- Addon
-AethysTool = AT;
+AethysTools = AT;
 
 -- Create the MainFrame
-AT.MainFrame = CreateFrame("Frame", "AethysTool_MainFrame", UIParent);
+AT.MainFrame = CreateFrame("Frame", "AethysTools_MainFrame", UIParent);
 
 -- Main
 AT.Timer = {

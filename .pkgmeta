@@ -1,4 +1,4 @@
-package-as: AethysTool
+package-as: AethysTools
 
 externals:
  AethysCore:  
