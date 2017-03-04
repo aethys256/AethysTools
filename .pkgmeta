@@ -6,8 +6,4 @@ externals:
 
 enable-nolib-creation: no
 
-ignore:
- - .github
- - .gitattributes
- - LICENSE
- - README.md
+license-output: LICENSE
