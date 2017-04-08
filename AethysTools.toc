@@ -1,8 +1,8 @@
-## Interface: 70100
+## Interface: 70200
 
 ## Title: Aethys |cFFA330C9Tools|r
 ## Author: Aethys
-## Version: 7.1.5002
+## Version: 7.2.0000
 ## Notes: Quality of Life + Extra Features using AethysCore.
 
 ## DefaultState: Enabled
