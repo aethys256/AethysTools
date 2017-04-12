@@ -14,7 +14,7 @@
     local pairs = pairs;
     local tostring = tostring;
     -- File Locals
-    local FrameID, Nameplate, ThisUnit, Count
+    local NameplateUnits = Unit["Nameplate"];
     AT.Nameplate = {
         TTD = {}
     };
@@ -24,38 +24,38 @@
 --- ======= TTD TEXT =======
     -- Add TTD Infos to Nameplates
     function AT.Nameplate.AddTTD ()
-        AT.Nameplate.HideTTD();
-        for i = 1, AC.MAXIMUM do
-            Count = tostring(i);
-
-            Nameplate = C_NamePlate.GetNamePlateForUnit("nameplate"..Count);
-            if Nameplate then
-            -- Update TTD
-            if Nameplate.UnitFrame.unitExists then
-                FrameID = Nameplate:GetName();
-                -- Init Frame if not already
-                if not AT.Nameplate.TTD[FrameID] then
-                    AT.Nameplate.TTD[FrameID] = Nameplate:CreateFontString("NamePlate"..Count.."AT-TTD", UIParent, "GameFontHighlightSmallOutline")
-                    AT.Nameplate.TTD[FrameID]:SetJustifyH("CENTER");
-                    AT.Nameplate.TTD[FrameID]:SetJustifyV("CENTER");
-                    AT.Nameplate.TTD[FrameID]:SetText("");
-                end
-                ThisUnit = Unit["Nameplate"..Count];
-                AT.Nameplate.TTD[FrameID]:SetText(ThisUnit:TimeToDie() == 6666 and "INF" or ThisUnit:TimeToDie() < 6666 and tostring(ThisUnit:TimeToDie()) or "");
-                if not AT.Nameplate.TTD[FrameID]:IsVisible() then
-                    AT.Nameplate.TTD[FrameID]:SetPoint("LEFT", Nameplate.UnitFrame.name, "CENTER", (Nameplate.UnitFrame.healthBar:GetWidth()/2)+AT.GUISettings.Nameplates.TTD.XOffset, AT.GUISettings.Nameplates.TTD.YOffset)
-                    AT.Nameplate.TTD[FrameID]:Show();
-                end
+      AT.Nameplate.HideTTD();
+      local ThisUnit, Nameplate;
+      for i = 1, #NameplateUnits do
+        ThisUnit = NameplateUnits[i];
+        Nameplate = C_NamePlate.GetNamePlateForUnit(ThisUnit:ID());
+        if Nameplate then
+          -- Update TTD
+          if Nameplate.UnitFrame.unitExists then
+            local Frame = AT.Nameplate.TTD[Nameplate:GetName()];
+            -- Init Frame if not already
+            if not Frame then
+              Frame = Nameplate:CreateFontString(string.format("%s%d", "AethysRotation_TTD_NamePlate", i), UIParent, "GameFontHighlightSmallOutline");
+              Frame:SetJustifyH("CENTER");
+              Frame:SetJustifyV("CENTER");
+              Frame:SetText("");
+              AT.Nameplate.TTD[Nameplate:GetName()] = Frame;
             end
-
+            
+            Frame:SetText(ThisUnit:TimeToDie() == 6666 and "INF" or ThisUnit:TimeToDie() < 6666 and tostring(ThisUnit:TimeToDie()) or "");
+            if not Frame:IsVisible() then
+              Frame:SetPoint("LEFT", Nameplate.UnitFrame.name, "CENTER", (Nameplate.UnitFrame.healthBar:GetWidth()/2)+AT.GUISettings.Nameplates.TTD.XOffset, AT.GUISettings.Nameplates.TTD.YOffset);
+              Frame:Show();
             end
+          end
         end
+      end
     end
 
     -- Hide the TTD Text
     function AT.Nameplate.HideTTD ()
-        for Key, Value in pairs(AT.Nameplate.TTD) do
-            -- Hide the FontString if it is visible
-            if Value:IsVisible() then Value:Hide(); end
-        end
+      for Key, Value in pairs(AT.Nameplate.TTD) do
+        -- Hide the FontString if it is visible
+        if Value:IsVisible() then Value:Hide(); end
+      end
     end
