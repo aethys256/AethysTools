@@ -12,6 +12,7 @@
     local Item = AC.Item;
     -- Lua
     local pairs = pairs;
+    local stringformat = string.format;
     local tostring = tostring;
     -- File Locals
     local NameplateUnits = Unit["Nameplate"];
@@ -42,7 +43,7 @@
               AT.Nameplate.TTD[Nameplate:GetName()] = Frame;
             end
             
-            Frame:SetText(ThisUnit:TimeToDie() == 6666 and "INF" or ThisUnit:TimeToDie() < 6666 and tostring(ThisUnit:TimeToDie()) or "");
+            Frame:SetText(ThisUnit:TimeToDie() == 6666 and "INF" or ThisUnit:TimeToDie() < 6666 and stringformat("%d", ThisUnit:TimeToDie()) or "");
             if not Frame:IsVisible() then
               Frame:SetPoint("LEFT", Nameplate.UnitFrame.name, "CENTER", (Nameplate.UnitFrame.healthBar:GetWidth()/2)+AT.GUISettings.Nameplates.TTD.XOffset, AT.GUISettings.Nameplates.TTD.YOffset);
               Frame:Show();
