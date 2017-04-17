@@ -27,6 +27,7 @@
     function AT.Nameplate.AddTTD ()
       AT.Nameplate.HideTTD();
       local ThisUnit, Nameplate;
+      local IsInInstancedPvP = Player:IsInInstancedPvP();
       for i = 1, #NameplateUnits do
         ThisUnit = NameplateUnits[i];
         Nameplate = C_NamePlate.GetNamePlateForUnit(ThisUnit:ID());
@@ -43,10 +44,13 @@
               AT.Nameplate.TTD[Nameplate:GetName()] = Frame;
             end
             
-            Frame:SetText(
-              (not Player:IsInInstancedPvP() and ((ThisUnit:TimeToDie() == 6666 and "INF")
-                or (ThisUnit:TimeToDie() < 6666 and stringformat("%d", ThisUnit:TimeToDie()))))
-              or "");
+            if IsInInstancedPvP then
+              Frame:SetText("");
+            else
+              Frame:SetText((ThisUnit:TimeToDie() == 6666 and "INF")
+                          or (ThisUnit:TimeToDie() < 6666 and stringformat("%d", ThisUnit:TimeToDie()))
+                          or "");
+            end
             if not Frame:IsVisible() then
               Frame:SetPoint("LEFT", Nameplate.UnitFrame.name, "CENTER", (Nameplate.UnitFrame.healthBar:GetWidth()/2)+AT.GUISettings.Nameplates.TTD.XOffset, AT.GUISettings.Nameplates.TTD.YOffset);
               Frame:Show();
