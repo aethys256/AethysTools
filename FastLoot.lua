@@ -1,19 +1,19 @@
 --- ============================ HEADER ============================
 --- ======= LOCALIZE =======
   -- Addon
-    local addonName, AT = ...;
-    -- AethysCore
-    local AC = AethysCore;
-    local Cache = AethysCache;
-    local Unit = AC.Unit;
-    local Player = Unit.Player;
-    local Target = Unit.Target;
-    local Spell = AC.Spell;
-    local Item = AC.Item;
-    -- Lua
-    
-    -- File Locals
-    
+  local addonName, AT = ...;
+  -- AethysCore
+  local AC = AethysCore;
+  local Cache = AethysCache;
+  local Unit = AC.Unit;
+  local Player = Unit.Player;
+  local Target = Unit.Target;
+  local Spell = AC.Spell;
+  local Item = AC.Item;
+  -- Lua
+  
+  -- File Locals
+  
 
 
 --- ============================ CONTENT ============================
