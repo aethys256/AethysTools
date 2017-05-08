@@ -2,7 +2,7 @@ package-as: AethysTools
 
 externals:
  AethysCore:  
-  url: https://github.com/Aethys256/AethysCore
+  url: https://github.com/SimCMinMax/AethysCore
 
 enable-nolib-creation: no
 
