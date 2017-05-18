@@ -15,4 +15,5 @@ Settings.lua
 Nameplates.lua
 FastLoot.lua
 NickTag.lua
+PullAnnouncer.lua
 Main.lua
