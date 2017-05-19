@@ -144,7 +144,7 @@
     -- TODO: Optimizations!
     AC:RegisterForEvent(
       function (Event, TimeStamp, CombatEvent, _, SourceGUID, SourceName, SourceFlags, _, DestGUID, DestName, DestFlags, _, SpellID, SpellName)
-        if not AT.GUISettings.PullAnnouncer.RaidOnly or Player:IsInRaid() then
+        if not AT.GUISettings.PullAnnouncer.RaidOnly or IsInRaid() then
           if GetTime() >= OutCombatTime and not Player:IsDeadOrGhost() and (not Player:AffectingCombat() or GetTime() <= CombatTime)
             and SourceName and DestName and SourceName ~= DestName and (AT.GUISettings.PullAnnouncer.Mode == "ALL" or Roster[SourceName] or Roster[DestName])
             and not string.find(CombatEvent, "PERIODIC")
