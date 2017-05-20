@@ -100,7 +100,7 @@
     -- Allow further Checks when going in combat.
     AC:RegisterForEvent(
       function ()
-        CombatTime = GetTime() + 3;
+        CombatTime = GetTime() + 2;
       end
       , "PLAYER_REGEN_DISABLED"
     );
@@ -119,7 +119,7 @@
     -- Update the Group Roster if the mode is set to Group.
     AC:RegisterForEvent(
       function ()
-        if AT.GUISettings.PullAnnouncer.Mode == "GROUP" then
+        if AT.GUISettings.PullAnnouncer.FromWho == "GROUP" then
           Roster = {};
           if IsInGroup() then
             local Type, Name, Server;
@@ -142,11 +142,11 @@
   -- COMBAT_LOG_EVENT_UNFILTERED"
     -- Pull Check Handler
     -- TODO: Optimizations!
-    AC:RegisterForEvent(
-      function (Event, TimeStamp, CombatEvent, _, SourceGUID, SourceName, SourceFlags, _, DestGUID, DestName, DestFlags, _, SpellID, SpellName)
-        if not AT.GUISettings.PullAnnouncer.RaidOnly or Player:IsInRaid() then
+    AC:RegisterForCombatEvent(
+      function (TimeStamp, CombatEvent, _, SourceGUID, SourceName, SourceFlags, _, DestGUID, DestName, DestFlags, _, SpellID, SpellName)
+        if AT.GUISettings.PullAnnouncer.Difficulty[Player:InstanceDifficulty()] then
           if GetTime() >= OutCombatTime and not Player:IsDeadOrGhost() and (not Player:AffectingCombat() or GetTime() <= CombatTime)
-            and SourceName and DestName and SourceName ~= DestName and (AT.GUISettings.PullAnnouncer.Mode == "ALL" or Roster[SourceName] or Roster[DestName])
+            and SourceName and DestName and SourceName ~= DestName and (AT.GUISettings.PullAnnouncer.FromWho == "ALL" or Roster[SourceName] or Roster[DestName])
             and not string.find(CombatEvent, "PERIODIC")
             and (string.find(CombatEvent, "_DAMAGE") or string.find(CombatEvent, "_MISSED") or string.find(CombatEvent, "CAST_SUCCESS")) then
             -- Player Attack
@@ -187,5 +187,54 @@
           end
         end
       end
-      , "COMBAT_LOG_EVENT_UNFILTERED"
+      , "CAST_SUCCESS"
+    );
+
+    AC:RegisterForCombatSuffixEvent(
+      function (TimeStamp, CombatEvent, _, SourceGUID, SourceName, SourceFlags, _, DestGUID, DestName, DestFlags, _, SpellID, SpellName)
+        if AT.GUISettings.PullAnnouncer.Difficulty[Player:InstanceDifficulty()] then
+          if GetTime() >= OutCombatTime and not Player:IsDeadOrGhost() and (not Player:AffectingCombat() or GetTime() <= CombatTime)
+            and SourceName and DestName and SourceName ~= DestName and (AT.GUISettings.PullAnnouncer.FromWho == "ALL" or Roster[SourceName] or Roster[DestName])
+            and not string.find(CombatEvent, "PERIODIC")
+            and (string.find(CombatEvent, "_DAMAGE") or string.find(CombatEvent, "_MISSED") or string.find(CombatEvent, "CAST_SUCCESS")) then
+            -- Player Attack
+            if bit.band(SourceFlags, COMBATLOG_OBJECT_TYPE_PLAYER) ~= 0 and bit.band(DestFlags, COMBATLOG_OBJECT_TYPE_NPC) ~= 0 then
+              if not Pulled[DestGUID] then
+                if string.find(CombatEvent, "SWING") then
+                  Pulled[DestGUID] = true;
+                  Announce(SourceName.." pulled "..DestName.." with Auto Attack");
+                  return;
+                elseif not string.find(CombatEvent, "CAST_SUCCESS") or SpecialSpells[SpellID] then
+                  Pulled[DestGUID] = true;
+                  Announce(SourceName.." pulled "..DestName.." with "..SpellName);
+                  return;
+                end
+              end
+            -- Body Pull
+            elseif bit.band(DestFlags, COMBATLOG_OBJECT_TYPE_PLAYER) ~= 0 and bit.band(SourceFlags, COMBATLOG_OBJECT_TYPE_NPC) ~= 0 then
+                if not Pulled[SourceGUID] then
+                  Pulled[SourceGUID] = true;
+                  Announce(DestName.." body pulled "..SourceName);
+                  return;
+                end
+            -- Pet Attack
+            elseif bit.band(SourceFlags, COMBATLOG_OBJECT_CONTROL_PLAYER) ~= 0 and bit.band(DestFlags, COMBATLOG_OBJECT_TYPE_NPC) ~= 0 then
+              if not Pulled[DestGUID] then
+                Pulled[DestGUID] = true;
+                Announce(SourceName.."(Pet) pulled "..DestName);
+                return;
+              end
+            -- Pet Body Pull
+            elseif bit.band(SourceFlags, COMBATLOG_OBJECT_CONTROL_PLAYER) ~= 0 and bit.band(SourceFlags, COMBATLOG_OBJECT_TYPE_NPC) ~= 0 then
+              if not Pulled[SourceGUID] then
+                Pulled[SourceGUID] = true;
+                Announce(DestName.."(Pet) body pulled "..SourceName);
+                return;
+              end
+            end
+          end
+        end
+      end
+      , "_DAMAGE"
+      , "_MISSED"
     );
