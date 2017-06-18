@@ -16,4 +16,5 @@ Nameplates.lua
 FastLoot.lua
 NickTag.lua
 PullAnnouncer.lua
+Broken_Isles.lua
 Main.lua
