@@ -7,7 +7,7 @@
 --- ============================ CONTENT ============================
   -- All settings here should be moved into the GUI someday
   AT.GUISettings = {
-    FastLootEnabled = false,
+    FastLootEnabled = true,
     Nameplates = {
       TTD = {
         Enabled = true,
