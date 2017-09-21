@@ -33,7 +33,7 @@
         Nameplate = C_NamePlate.GetNamePlateForUnit(ThisUnit:ID());
         if Nameplate then
           -- Update TTD
-          if Nameplate.UnitFrame.unitExists then
+          if Nameplate.UnitFrame.unitExists or AT.GUISettings.Nameplates.TTD.useElvUI then
             local Frame = AT.Nameplate.TTD[Nameplate:GetName()];
             -- Init Frame if not already
             if not Frame then
@@ -47,15 +47,20 @@
             if IsInInstancedPvP then
               Frame:SetText("");
             else
-              Frame:SetText((ThisUnit:TimeToDie() == 6666 and "INF")
+              Frame:SetText(((ThisUnit:TimeToDie() == 6666 and AT.GUISettings.Nameplates.TTD.showINF) and "INF")
                           or (ThisUnit:TimeToDie() < 6666 and stringformat("%d", ThisUnit:TimeToDie()))
                           or "");
             end
             if not Frame:IsVisible() then
-              Frame:SetPoint("LEFT", Nameplate.UnitFrame.name, "CENTER", (Nameplate.UnitFrame.healthBar:GetWidth()/2)+AT.GUISettings.Nameplates.TTD.XOffset, AT.GUISettings.Nameplates.TTD.YOffset);
-              Frame:Show();
+			  if AT.GUISettings.Nameplates.TTD.useElvUI then
+			    Frame:SetPoint("LEFT", Nameplate.UnitFrame.HealthBar, "RIGHT", AT.GUISettings.Nameplates.TTD.XOffsetElvUI, AT.GUISettings.Nameplates.TTD.YOffsetElvUI*Nameplate.UnitFrame.HealthBar.currentScale);
+				Frame:SetTextHeight(10*Nameplate.UnitFrame.HealthBar.currentScale);
+			  else
+                Frame:SetPoint("LEFT", Nameplate.UnitFrame.name, "CENTER", (Nameplate.UnitFrame.healthBar:GetWidth()/2)+AT.GUISettings.Nameplates.TTD.XOffset, AT.GUISettings.Nameplates.TTD.YOffset);
+			  end
+			  Frame:Show();
             end
-          end
+		  end
         end
       end
     end
