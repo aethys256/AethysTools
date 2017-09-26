@@ -11,6 +11,8 @@
     Nameplates = {
       TTD = {
         Enabled = true,
+        useElvUI = true, -- set this if you are using ElvUI nameplates
+        showINF = false,
         -- TODO: Make a DB with all "default" offset loaded based on what addon the user has Enabled
         -- TODO: And make a command to input custom offset
         -- Default Nameplate
@@ -18,7 +20,10 @@
           --YOffset = -11
         -- Kui Nameplate
           XOffset = 16,
-          YOffset = -16
+          YOffset = -16,
+        -- ElvUI Nameplate
+          XOffsetElvUI = 5,
+          YOffsetElvUI = -16
       }
     },
     PullAnnouncer = {
