@@ -11,8 +11,8 @@
     Nameplates = {
       TTD = {
         Enabled = true,
-        useElvUI = false, -- set this if you are using ElvUI nameplates
-        showINF = true,
+        useElvUI = true, -- set this if you are using ElvUI nameplates
+        showINF = false,
         -- TODO: Make a DB with all "default" offset loaded based on what addon the user has Enabled
         -- TODO: And make a command to input custom offset
         -- Default Nameplate
