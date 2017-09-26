@@ -52,15 +52,15 @@
                           or "");
             end
             if not Frame:IsVisible() then
-			  if AT.GUISettings.Nameplates.TTD.useElvUI then
-			    Frame:SetPoint("LEFT", Nameplate.UnitFrame.HealthBar, "RIGHT", AT.GUISettings.Nameplates.TTD.XOffsetElvUI, AT.GUISettings.Nameplates.TTD.YOffsetElvUI*(Nameplate.UnitFrame.HealthBar.currentScale or 1));
-				Frame:SetTextHeight(10*(Nameplate.UnitFrame.HealthBar.currentScale or 1));
-			  else
+              if AT.GUISettings.Nameplates.TTD.useElvUI then
+                Frame:SetPoint("LEFT", Nameplate.UnitFrame.HealthBar, "RIGHT", AT.GUISettings.Nameplates.TTD.XOffsetElvUI, AT.GUISettings.Nameplates.TTD.YOffsetElvUI*(Nameplate.UnitFrame.HealthBar.currentScale or 1));
+                Frame:SetTextHeight(10*(Nameplate.UnitFrame.HealthBar.currentScale or 1));
+              else
                 Frame:SetPoint("LEFT", Nameplate.UnitFrame.name, "CENTER", (Nameplate.UnitFrame.healthBar:GetWidth()/2)+AT.GUISettings.Nameplates.TTD.XOffset, AT.GUISettings.Nameplates.TTD.YOffset);
-			  end
-			  Frame:Show();
+              end
+              Frame:Show();
             end
-		  end
+          end
         end
       end
     end
