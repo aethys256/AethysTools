@@ -26,6 +26,7 @@
     -- Add TTD Infos to Nameplates
     function AT.Nameplate.AddTTD ()
       AT.Nameplate.HideTTD();
+      local useElvUINameplates = ElvUI and ElvUI[1].NamePlates; -- check if ElvUI is used and the nameplates module is enabled
       local ThisUnit, Nameplate;
       local IsInInstancedPvP = Player:IsInInstancedPvP();
       for i = 1, #NameplateUnits do
@@ -33,7 +34,7 @@
         Nameplate = C_NamePlate.GetNamePlateForUnit(ThisUnit:ID());
         if Nameplate then
           -- Update TTD
-          if Nameplate.UnitFrame.unitExists or AT.GUISettings.Nameplates.TTD.useElvUI then
+          if Nameplate.UnitFrame.unitExists or useElvUINameplates then
             local Frame = AT.Nameplate.TTD[Nameplate:GetName()];
             -- Init Frame if not already
             if not Frame then
@@ -52,7 +53,7 @@
                           or "");
             end
             if not Frame:IsVisible() then
-              if AT.GUISettings.Nameplates.TTD.useElvUI then
+              if useElvUINameplates then
                 Frame:SetPoint("LEFT", Nameplate.UnitFrame.HealthBar, "RIGHT", AT.GUISettings.Nameplates.TTD.XOffsetElvUI, AT.GUISettings.Nameplates.TTD.YOffsetElvUI*(Nameplate.UnitFrame.HealthBar.currentScale or 1));
                 Frame:SetTextHeight(10*(Nameplate.UnitFrame.HealthBar.currentScale or 1));
               else
