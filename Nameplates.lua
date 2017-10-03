@@ -54,8 +54,8 @@
             end
             if not Frame:IsVisible() then
               if useElvUINameplates then
-                Frame:SetPoint("LEFT", Nameplate.UnitFrame.HealthBar, "RIGHT", AT.GUISettings.Nameplates.TTD.XOffsetElvUI, AT.GUISettings.Nameplates.TTD.YOffsetElvUI*(Nameplate.UnitFrame.HealthBar.currentScale or 1));
-                Frame:SetTextHeight(10*(Nameplate.UnitFrame.HealthBar.currentScale or 1));
+                Frame:SetPoint("LEFT", Nameplate.unitFrame.HealthBar, "RIGHT", AT.GUISettings.Nameplates.TTD.XOffsetElvUI, AT.GUISettings.Nameplates.TTD.YOffsetElvUI*(Nameplate.unitFrame.HealthBar.currentScale or 1));
+                Frame:SetTextHeight(10*(Nameplate.unitFrame.HealthBar.currentScale or 1));
               else
                 Frame:SetPoint("LEFT", Nameplate.UnitFrame.name, "CENTER", (Nameplate.UnitFrame.healthBar:GetWidth()/2)+AT.GUISettings.Nameplates.TTD.XOffset, AT.GUISettings.Nameplates.TTD.YOffset);
               end
