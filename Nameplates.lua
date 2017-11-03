@@ -56,7 +56,7 @@
               if useElvUINameplates then
                 Frame:SetPoint("LEFT", Nameplate.unitFrame.HealthBar, "RIGHT", AT.GUISettings.Nameplates.TTD.XOffsetElvUI, AT.GUISettings.Nameplates.TTD.YOffsetElvUI*(Nameplate.unitFrame.HealthBar.currentScale or 1));
                 local filename, fontHeight, flags = Nameplate.unitFrame.HealthBar.text:GetFont();
-                Frame:SetFont(filename, fontHeight * Nameplate.unitFrame.HealthBar.currentScale, flags);
+                Frame:SetFont(filename, fontHeight * Nameplate.unitFrame.HealthBar.currentScale or 1, flags);
               else
                 Frame:SetPoint("LEFT", Nameplate.UnitFrame.name, "CENTER", (Nameplate.UnitFrame.healthBar:GetWidth()/2)+AT.GUISettings.Nameplates.TTD.XOffset, AT.GUISettings.Nameplates.TTD.YOffset);
               end
