@@ -1,8 +1,8 @@
 package-as: AethysTools
 
 externals:
- AethysCore:  
-  url: https://github.com/SimCMinMax/AethysCore
+ HeroLib:
+  url: https://github.com/herotc/hero-lib
 
 enable-nolib-creation: no
 

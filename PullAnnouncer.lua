@@ -2,14 +2,14 @@
 --- ======= LOCALIZE =======
   -- Addon
   local addonName, AT = ...;
-  -- AethysCore
-  local AC = AethysCore;
-  local Cache = AethysCache;
-  local Unit = AC.Unit;
+  -- HeroLib
+  local HL = HeroLib;
+  local Cache = HeroCache;
+  local Unit = HL.Unit;
   local Player = Unit.Player;
   local Target = Unit.Target;
-  local Spell = AC.Spell;
-  local Item = AC.Item;
+  local Spell = HL.Spell;
+  local Item = HL.Item;
   -- Lua
   
   -- File Locals
@@ -44,8 +44,8 @@
 --- ============================ CONTENT ============================
   -- Functions to send the message.
   local function Output (Message, Channel)
-    local BossModTime = AC.BossModTime or 0;
-    local BossModEndTime = AC.BossModEndTime or 0;
+    local BossModTime = HL.BossModTime or 0;
+    local BossModEndTime = HL.BossModEndTime or 0;
     if BossModTime ~= 0 and BossModEndTime-GetTime() >= -1 then
       if Channel then
         SendChatMessage(Message .. " at " .. string.format("%0.2f", BossModEndTime-GetTime()) .. "s.", Channel);
@@ -98,7 +98,7 @@
   -- Events listener
   -- PLAYER_REGEN_DISABLED
     -- Allow further Checks when going in combat.
-    AC:RegisterForEvent(
+    HL:RegisterForEvent(
       function ()
         CombatTime = GetTime() + 2;
       end
@@ -107,7 +107,7 @@
 
   -- PLAYER_REGEN_ENABLED
     -- Prevent further Checks when going out of combat.
-    AC:RegisterForEvent(
+    HL:RegisterForEvent(
       function ()
         OutCombatTime = GetTime() + 5;
         Pulled = {};
@@ -117,7 +117,7 @@
 
   -- RAID_INSTANCE_WELCOME & GROUP_ROSTER_UPDATE
     -- Update the Group Roster if the mode is set to Group.
-    AC:RegisterForEvent(
+    HL:RegisterForEvent(
       function ()
         if AT.GUISettings.PullAnnouncer.FromWho == "GROUP" then
           Roster = {};
@@ -142,7 +142,7 @@
   -- COMBAT_LOG_EVENT_UNFILTERED"
     -- Pull Check Handler
     -- TODO: Optimizations!
-    AC:RegisterForCombatEvent(
+    HL:RegisterForCombatEvent(
       function (TimeStamp, CombatEvent, _, SourceGUID, SourceName, SourceFlags, _, DestGUID, DestName, DestFlags, _, SpellID, SpellName)
         if AT.GUISettings.PullAnnouncer.Difficulty[Player:InstanceDifficulty()] then
           if GetTime() >= OutCombatTime and not Player:IsDeadOrGhost() and (not Player:AffectingCombat() or GetTime() <= CombatTime)
@@ -190,7 +190,7 @@
       , "CAST_SUCCESS"
     );
 
-    AC:RegisterForCombatSuffixEvent(
+    HL:RegisterForCombatSuffixEvent(
       function (TimeStamp, CombatEvent, _, SourceGUID, SourceName, SourceFlags, _, DestGUID, DestName, DestFlags, _, SpellID, SpellName)
         if AT.GUISettings.PullAnnouncer.Difficulty[Player:InstanceDifficulty()] then
           if GetTime() >= OutCombatTime and not Player:IsDeadOrGhost() and (not Player:AffectingCombat() or GetTime() <= CombatTime)

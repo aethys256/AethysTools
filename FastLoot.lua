@@ -2,14 +2,14 @@
 --- ======= LOCALIZE =======
   -- Addon
   local addonName, AT = ...;
-  -- AethysCore
-  local AC = AethysCore;
-  local Cache = AethysCache;
-  local Unit = AC.Unit;
+  -- HeroLib
+  local HL = HeroLib;
+  local Cache = HeroCache;
+  local Unit = HL.Unit;
   local Player = Unit.Player;
   local Target = Unit.Target;
-  local Spell = AC.Spell;
-  local Item = AC.Item;
+  local Spell = HL.Spell;
+  local Item = HL.Item;
   -- Lua
   
   -- File Locals
@@ -34,7 +34,7 @@
       end
       return EmptySlot;
     end
-    AC:RegisterForEvent(
+    HL:RegisterForEvent(
       function ()
         if not IsShiftKeyDown() then
           -- Window Close fallback in case the game forgot to do it on an empty window.
@@ -45,7 +45,7 @@
       end
       , "LOOT_OPENED"
     );
-    AC:RegisterForEvent(
+    HL:RegisterForEvent(
       function (Event, MessageType, Message)
         if Message == ERR_OBJECT_IS_BUSY then
           GetLoots();

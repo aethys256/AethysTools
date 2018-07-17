@@ -2,14 +2,14 @@
 --- ======= LOCALIZE =======
   -- Addon
     local addonName, AT = ...;
-    -- AethysCore
-    local AC = AethysCore;
-    local Cache = AethysCache;
-    local Unit = AC.Unit;
+    -- HeroLib
+    local HL = HeroLib;
+    local Cache = HeroCache;
+    local Unit = HL.Unit;
     local Player = Unit.Player;
     local Target = Unit.Target;
-    local Spell = AC.Spell;
-    local Item = AC.Item;
+    local Spell = HL.Spell;
+    local Item = HL.Item;
     -- Lua
     local pairs = pairs;
     local stringformat = string.format;
@@ -38,13 +38,13 @@
             local Frame = AT.Nameplate.TTD[Nameplate:GetName()];
             -- Init Frame if not already
             if not Frame then
-              Frame = Nameplate:CreateFontString(string.format("%s%d", "AethysRotation_TTD_NamePlate", i), UIParent, "GameFontHighlightSmallOutline");
+              Frame = Nameplate:CreateFontString(string.format("%s%d", "AethysTools_TTD_NamePlate", i), UIParent, "GameFontHighlightSmallOutline");
               Frame:SetJustifyH("CENTER");
               Frame:SetJustifyV("CENTER");
               Frame:SetText("");
               AT.Nameplate.TTD[Nameplate:GetName()] = Frame;
             end
-            
+
             if IsInInstancedPvP then
               Frame:SetText("");
             else

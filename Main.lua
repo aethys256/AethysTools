@@ -2,14 +2,14 @@
 --- ======= LOCALIZE =======
   -- Addon
   local addonName, AT = ...;
-  -- AethysCore
-  local AC = AethysCore;
-  local Cache = AethysCache;
-  local Unit = AC.Unit;
+  -- HeroLib
+  local HL = HeroLib;
+  local Cache = HeroCache;
+  local Unit = HL.Unit;
   local Player = Unit.Player;
   local Target = Unit.Target;
-  local Spell = AC.Spell;
-  local Item = AC.Item;
+  local Spell = HL.Spell;
+  local Item = HL.Item;
   -- File Locals
   
 
@@ -28,11 +28,11 @@
     TTD = 0
   };
   function AT.Pulse ()
-    if AC.GetTime(true) > AT.Timer.Pulse then
-      AT.Timer.Pulse = AC.GetTime() + AC.Timer.PulseOffset; 
+    if HL.GetTime(true) > AT.Timer.Pulse then
+      AT.Timer.Pulse = HL.GetTime() + HL.Timer.PulseOffset; 
 
-      if AT.GUISettings.Nameplates.TTD.Enabled and AC.GetTime() > AT.Timer.TTD then
-        AT.Timer.TTD = AC.Timer.TTD;
+      if AT.GUISettings.Nameplates.TTD.Enabled and HL.GetTime() > AT.Timer.TTD then
+        AT.Timer.TTD = HL.Timer.TTD;
         AT.Nameplate.AddTTD();
       end
     end
