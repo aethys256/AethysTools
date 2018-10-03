@@ -29,8 +29,8 @@
       local useElvUINameplates = ElvUI and ElvUI[1].NamePlates; -- check if ElvUI is used and the nameplates module is enabled
       local ThisUnit, Nameplate;
       local IsInInstancedPvP = Player:IsInInstancedPvP();
-      for i = 1, #NameplateUnits do
-        ThisUnit = NameplateUnits[i];
+      for i = 1, HL.MAXIMUM do
+        ThisUnit = NameplateUnits["nameplate" .. i];
         Nameplate = C_NamePlate.GetNamePlateForUnit(ThisUnit:ID());
         if Nameplate then
           -- Update TTD
