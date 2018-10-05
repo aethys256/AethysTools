@@ -12,6 +12,8 @@
       TTD = {
         Enabled = true,
         showINF = true,
+        -- Factor to scale the font size of the TTD
+        ScaleFac = 1.0,
         -- TODO: Make a DB with all "default" offset loaded based on what addon the user has Enabled
         -- TODO: And make a command to input custom offset
         -- Default Nameplate
