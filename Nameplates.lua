@@ -39,6 +39,8 @@
             -- Init Frame if not already
             if not Frame then
               Frame = Nameplate:CreateFontString(string.format("%s%d", "AethysTools_TTD_NamePlate", i), UIParent, "GameFontHighlightSmallOutline");
+              local filename, fontHeight, flags = Frame:GetFont();
+              Frame:SetFont(filename, fontHeight * AT.GUISettings.Nameplates.TTD.ScaleFac, flags);
               Frame:SetJustifyH("CENTER");
               Frame:SetJustifyV("CENTER");
               Frame:SetText("");
