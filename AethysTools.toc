@@ -8,13 +8,11 @@
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## Dependencies: HeroLib
-## OptionalDeps: Details
 ## SavedVariables: AethysToolsDB
 
 Settings.lua
 Nameplates.lua
 FastLoot.lua
-NickTag.lua
 PullAnnouncer.lua
 Broken_Isles.lua
 Main.lua

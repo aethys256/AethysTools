@@ -12,8 +12,6 @@
   local Item = HL.Item;
   -- Lua
   local stringlower = string.lower;
-  -- File Locals
-  local NickTag = _G.NickTag;
 
 
 --- ============================ CONTENT ============================
