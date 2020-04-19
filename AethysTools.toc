@@ -13,5 +13,4 @@ Settings.lua
 Nameplates.lua
 FastLoot.lua
 PullAnnouncer.lua
-Broken_Isles.lua
 Main.lua
