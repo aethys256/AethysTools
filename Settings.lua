@@ -11,17 +11,23 @@
     Nameplates = {
       TTD = {
         Enabled = true,
-        showINF = true,
+        ShowINF = true,
         -- Factor to scale the font size of the TTD
         ScaleFac = 1.0,
         -- TODO: Make a DB with all "default" offset loaded based on what addon the user has Enabled
         -- TODO: And make a command to input custom offset
         -- Default Nameplate
-          --XOffset = 5,
-          --YOffset = -11
+          XOffset = 5,
+          YOffset = -11,
         -- Kui Nameplate
-          XOffset = 16,
-          YOffset = -16,
+          XOffsetKui = 8,
+          YOffsetKui = -15,
+          XTargetOffsetKui = 26,
+          YTargetOffsetKui = -13,
+          XMinusOffsetKui = -10,
+          YMinusOffsetKui = -15,
+          XMinusTargetOffsetKui = 7,
+          YMinusTargetOffsetKui = -13,
         -- ElvUI Nameplate
           XOffsetElvUI = 5,
           YOffsetElvUI = -16
