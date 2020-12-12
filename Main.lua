@@ -11,7 +11,7 @@
   local Spell = HL.Spell;
   local Item = HL.Item;
   -- File Locals
-  
+
 
 --- ======= GLOBALIZE =======
   -- Addon
@@ -28,10 +28,10 @@
     TTD = 0
   };
   function AT.Pulse ()
-    if HL.GetTime(true) > AT.Timer.Pulse then
-      AT.Timer.Pulse = HL.GetTime() + HL.Timer.PulseOffset; 
+    if GetTime(true) > AT.Timer.Pulse then
+      AT.Timer.Pulse = GetTime() + HL.Timer.PulseOffset;
 
-      if AT.GUISettings.Nameplates.TTD.Enabled and HL.GetTime() > AT.Timer.TTD then
+      if AT.GUISettings.Nameplates.TTD.Enabled and GetTime() > AT.Timer.TTD then
         AT.Timer.TTD = HL.Timer.TTD;
         AT.Nameplate.AddTTD();
       end
